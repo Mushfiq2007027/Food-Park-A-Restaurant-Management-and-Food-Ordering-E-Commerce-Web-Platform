@@ -1,66 +1,313 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Food Park — Restaurant Management and Food Ordering Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Food Park is a full-stack, production-ready e-commerce web application built with Laravel 10. It provides a complete restaurant management solution — from a customer-facing food ordering storefront to a fully featured administrative backend — including multi-gateway payment processing, real-time notifications, table reservations, and live customer support chat.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Table of Contents
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Overview](#overview)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [System Requirements](#system-requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Running the Application](#running-the-application)
+- [Project Structure](#project-structure)
+- [Admin Panel](#admin-panel)
+- [Payment Gateways](#payment-gateways)
+- [Real-Time Features](#real-time-features)
+- [License](#license)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Overview
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Food Park serves both customers and restaurant administrators through two distinct interfaces:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Customer Storefront** — Browse the menu, filter by category, view daily offers, manage a shopping cart, apply coupons, select a delivery area, and complete checkout through one of three payment gateways.
+- **Admin Panel** — A comprehensive backend dashboard for managing every aspect of the restaurant: products, categories, orders, reservations, chefs, promotions, site content, and payment settings.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Features
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Customer-Facing
 
-### Premium Partners
+- Home page with dynamic hero sliders, banners, and "Why Choose Us" sections
+- Product catalog with category filtering, product galleries, size options, and add-on options
+- Quick-view product modal for fast cart additions
+- Full shopping cart with real-time quantity updates and item removal
+- Discount coupon system with validation
+- Delivery area selection with dynamic charge calculation at checkout
+- Checkout flow with address management (create, update, delete)
+- Secure payment processing via PayPal, Stripe, and Razorpay
+- Customer dashboard for viewing order history and managing account details
+- Table reservation booking with selectable time slots
+- Real-time live chat with the admin support team (powered by Pusher)
+- User authentication, registration, email verification, and password reset (Laravel Breeze)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Admin Panel
 
-## Contributing
+- Dashboard with key business metrics and new-order notifications
+- Full product management: create, edit, publish/unpublish products with image galleries, size variants, and customization options
+- Category management
+- Order management: view all orders, filter by status (Pending, In-Process, Delivered, Declined), update order status in real time
+- Coupon management with expiry date and usage-limit support
+- Delivery area management with configurable pricing
+- Chef profile management
+- Daily offer management with product-search integration
+- Banner slider and hero slider management
+- Table reservation management with time-slot configuration
+- Site-wide settings: general configuration and Pusher credentials
+- Payment gateway configuration for PayPal, Stripe, and Razorpay (credentials stored per environment)
+- Admin profile and password management
+- Real-time customer support chat
+- DataTables-powered listing pages with server-side processing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Technology Stack
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Layer | Technology |
+|---|---|
+| Backend Framework | Laravel 10 (PHP 8.1+) |
+| Frontend Build Tool | Vite 5 |
+| CSS Framework | Tailwind CSS 3 |
+| JavaScript | Alpine.js 3, Axios |
+| Real-Time | Laravel Echo, Pusher JS, Pusher PHP Server |
+| Payment — PayPal | srmklive/paypal |
+| Payment — Stripe | stripe/stripe-php |
+| Payment — Razorpay | razorpay/razorpay |
+| Shopping Cart | anayarojo/shoppingcart |
+| Data Tables | Yajra Laravel DataTables |
+| Notifications (Toast) | yoeunes/toastr |
+| Authentication | Laravel Breeze |
+| API Layer | Laravel Sanctum |
+| Database | MySQL |
+| HTTP Client | Guzzle 7 |
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## System Requirements
 
-## License
+- PHP >= 8.1
+- Composer
+- Node.js >= 18 and npm
+- MySQL >= 8.0
+- A Pusher account (for real-time features)
+- Payment gateway credentials for one or more of: PayPal, Stripe, Razorpay
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## Installation
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/your-username/food-park.git
+cd food-park
+```
+
+**2. Install PHP dependencies**
+
+```bash
+composer install
+```
+
+**3. Install JavaScript dependencies**
+
+```bash
+npm install
+```
+
+**4. Create the environment file**
+
+```bash
+cp .env.example .env
+```
+
+**5. Generate the application key**
+
+```bash
+php artisan key:generate
+```
+
+**6. Create the database**
+
+Create a MySQL database named `food_park` (or any name of your choice — update `DB_DATABASE` accordingly).
+
+**7. Run migrations and seeders**
+
+```bash
+php artisan migrate --seed
+```
+
+---
+
+## Configuration
+
+Open `.env` and update the following sections:
+
+### Database
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=food_park
+DB_USERNAME=root
+DB_PASSWORD=your_password
+```
+
+### Pusher (Real-Time)
+
+```env
+PUSHER_APP_ID=your_app_id
+PUSHER_APP_KEY=your_app_key
+PUSHER_APP_SECRET=your_app_secret
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME=https
+PUSHER_APP_CLUSTER=mt1
+```
+
+### Mail
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=your_mail_host
+MAIL_PORT=587
+MAIL_USERNAME=your_email@example.com
+MAIL_PASSWORD=your_mail_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=hello@yourdomain.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+### Payment Gateways
+
+Payment gateway credentials (PayPal Client ID/Secret, Stripe Secret Key, Razorpay Key/Secret) are configured directly from the Admin Panel under **Settings > Payment Gateway**, and are stored in the database. No manual `.env` entries are required for payment credentials.
+
+---
+
+## Running the Application
+
+**Development mode (runs both PHP server and Vite HMR simultaneously):**
+
+```bash
+# Terminal 1 — Laravel dev server
+php artisan serve
+
+# Terminal 2 — Vite asset bundler
+npm run dev
+```
+
+Visit `http://127.0.0.1:8000` in your browser.
+
+**Build frontend assets for production:**
+
+```bash
+npm run build
+```
+
+---
+
+## Project Structure
+
+```
+food-park/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Admin/          # 21 admin panel controllers
+│   │   │   └── Frontend/       # 8 customer-facing controllers
+│   │   ├── Middleware/
+│   │   └── Requests/
+│   ├── Models/                 # 23 Eloquent models
+│   ├── Events/                 # Real-time event classes (Pusher)
+│   ├── Listeners/
+│   ├── Mail/
+│   ├── Services/
+│   ├── Helpers/
+│   ├── Traits/
+│   └── DataTables/
+├── database/
+│   ├── migrations/             # 27 migration files
+│   ├── seeders/
+│   └── factories/
+├── resources/
+│   ├── views/
+│   └── js/
+├── routes/
+│   ├── web.php                 # Customer-facing routes
+│   ├── admin.php               # Admin panel routes
+│   ├── api.php
+│   └── auth.php
+├── public/
+├── .env.example
+├── composer.json
+├── package.json
+├── tailwind.config.js
+└── vite.config.js
+```
+
+---
+
+## Admin Panel
+
+The admin panel is accessible at `/admin/login`.
+
+Default admin credentials are set via the database seeder. It is strongly recommended to change the password immediately after the first login.
+
+The admin panel includes the following management sections:
+
+| Section | Description |
+|---|---|
+| Dashboard | Business summary and new order alerts |
+| Products | Full CRUD with gallery, sizes, and options |
+| Categories | Product category management |
+| Orders | Order lifecycle management (Pending to Delivered) |
+| Coupons | Discount code creation and management |
+| Delivery Areas | Service area and delivery fee configuration |
+| Chefs | Chef profile management |
+| Daily Offers | Featured product offer with section title control |
+| Sliders | Hero slider image management |
+| Banner Sliders | Promotional banner management |
+| Reservations | Incoming table booking management |
+| Reservation Times | Available time-slot configuration |
+| Why Choose Us | Editable feature highlight section |
+| Chat | Real-time customer support inbox |
+| Settings | General settings and Pusher configuration |
+| Payment Gateway | Per-gateway credential configuration |
+
+---
+
+## Payment Gateways
+
+Food Park integrates three payment gateways. Each can be enabled and configured independently from the Admin Panel without requiring code changes or redeployment.
+
+- **PayPal** — Implemented using the `srmklive/paypal` package. Supports sandbox and live modes.
+- **Stripe** — Implemented using the official `stripe/stripe-php` SDK.
+- **Razorpay** — Implemented using the official `razorpay/razorpay` SDK.
+
+Successful and cancelled payment callbacks are handled through dedicated routes, ensuring reliable order status updates regardless of network conditions at payment time.
+
+---
+
+## Real-Time Features
+
+Real-time functionality is powered by **Pusher** via **Laravel Echo** on the frontend and the **pusher/pusher-php-server** package on the backend.
+
+- **Order Notifications** — When a customer places an order, the admin dashboard receives an instant notification without requiring a page refresh.
+- **Live Chat** — Two-way real-time messaging between customers and the admin support team.
+
+To enable real-time features, ensure your Pusher credentials are configured in the `.env` file and the broadcast driver is set to `pusher`:
+
+```env
+BROADCAST_DRIVER=pusher
+```
+
+---
+
+
